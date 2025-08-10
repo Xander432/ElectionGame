@@ -1,0 +1,4 @@
+[
+    { "name": "Alice", "votes": 1234, "avatar": "res://assets/avatar1.png" },
+    { "name": "Bob", "votes": 987, "avatar": "res://assets/avatar2.png" }
+]
