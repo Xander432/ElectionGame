@@ -1,0 +1,50 @@
+extends Control
+
+var is_dark_theme = false
+
+func _ready():
+    load_data()
+    apply_light_theme() # Default Light Mode
+
+func load_data():
+    var file = FileAccess.open("res://data/election_data.json", FileAccess.READ)
+    if file:
+        var data = JSON.parse_string(file.get_as_text())
+        file.close()
+        if data:
+            var vbox = $ScrollContainer/VBoxContainer
+            vbox.clear()
+            for candidate in data:
+                var hbox = HBoxContainer.new()
+                var avatar = TextureRect.new()
+                avatar.texture = load(candidate["avatar"])
+                avatar.custom_min_size = Vector2(64, 64)
+                var label = Label.new()
+                label.text = "%s — %s votes" % [candidate["name"], candidate["votes"]]
+                hbox.add_child(avatar)
+                hbox.add_child(label)
+                vbox.add_child(hbox)
+
+func _on_ReloadButton_pressed():
+    load_data()
+
+func _on_ThemeToggle_pressed():
+    if is_dark_theme:
+        apply_light_theme()
+    else:
+        apply_dark_theme()
+    is_dark_theme = !is_dark_theme
+
+func apply_light_theme():
+    var theme = Theme.new()
+    theme.default_font_size = 16
+    theme.set_color("font_color", "Label", Color.BLACK)
+    theme.set_color("bg_color", "Panel", Color(1, 1, 1))
+    self.theme = theme
+
+func apply_dark_theme():
+    var theme = Theme.new()
+    theme.default_font_size = 16
+    theme.set_color("font_color", "Label", Color.WHITE)
+    theme.set_color("bg_color", "Panel", Color(0.1, 0.1, 0.1))
+    self.theme = theme
