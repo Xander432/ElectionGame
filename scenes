@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/MainUI.gd" id="1"]
+
+[node name="MainUI" type="Control"]
+script = ExtResource("1")
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+
+[node name="Buttons" type="HBoxContainer" parent="."]
+margin_top = 10
+margin_left = 10
+
+[node name="ReloadButton" type="Button" parent="Buttons"]
+text = "Reload Data"
+
+[node name="ThemeToggle" type="Button" parent="Buttons"]
+text = "Toggle Theme"
